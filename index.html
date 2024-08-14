@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Parts & Accessories</title>
+    <link rel="stylesheet" href="CSS/logForm.css">
+    <link rel="stylesheet" href="/CSS/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="ani_con">
+        <div><img src="image/ani.gif" alt=""></div>
+        <div>
+            <h1>COMPUTER</h1>
+            <p>Part & Accessories</p>
+        </div>
+    </div>
+    <form action="/HTML/home.html" id="login_form">
+        <table>
+            <tr>
+                <th>
+                    <h1>Login</h1>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <label class="label" for="email">Email or User Name</label>
+                    <input class="input name_email" type="email" name="email" required>
+                    <i class="fa-solid fa-user"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="label"  for="password">Password</label>
+                    <input class="input pass" type="password" name="password" id="pass" required>
+                    <i class="fa-solid fa-eye-slash"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button"  class="login_btn">Login</button>
+                    <div><p>Don't have an account?</p><span class="singup">SingUp</span></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <form action="/HTML/home.html" id="singup_form">
+        <table>
+            <tr>
+                <th>
+                    <h1>Sign Up</h1>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <label class="label"  for="name">User Name</label>
+                    <input class="input name" type="name" name="name" required>
+                    <i class="fa-solid fa-user"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="label"  for="email">Email</label>
+                    <input class="input email" type="email" name="email" required>
+                    <i class="fa-solid fa-envelope"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="label"  for="password">Create Password</label>
+                    <input class="input pass1" type="password" name="password" id="pass" required>
+                    <i class="fa-solid fa-eye-slash"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label class="label"  for="password">Confim Password</label>
+                    <input class="input pass2" type="password" name="password" id="pass" required>
+                    <i class="fa-solid fa-eye-slash"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" class="singup_btn">SignUp</button>
+                    <div><p>Aready have an account?</p><span class="login">Login</sp></div>
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <div class="have_acc_alert">
+        <div>
+            <i class="fa-solid fa-triangle-exclamation fa-beat-fade"></i>
+            <p>Something went worng.</p>
+            <em>You have an account?</em>
+            <button type="button" class="have_yes">Yes</button>
+            <button type="button" class="have_remove"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    </div>
+
+    <div class="error_show">
+        <div>
+            <i class="fa-solid fa-circle-exclamation fa-shake"></i>
+            <p>The username or password is incorrest.</p>
+        </div>
+    </div>
+    <script src="/JS/logForm.js"></script>
+</body>
+</html>
