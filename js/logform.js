@@ -28,7 +28,10 @@ const user_info_save = () => {
     const user_info = {
         u_name : `${name.value}`,
         u_email : `${email.value}`,
-        u_pass : `${pass2.value}`
+        u_pass : `${pass2.value}`,
+        u_phone: "",
+        u_city: "",
+        u_address: ""
         }
 
         localStorage.setItem("user",JSON.stringify(user_info));

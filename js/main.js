@@ -26,7 +26,7 @@ if(localStorage.getItem("circle") === "circle_move")
 
 
 const user_img_Url = localStorage.getItem("user-img");
-console.log(user_img_Url);
+
 if(user_img_Url)
     {
         profile_img.forEach(e => e.src = user_img_Url)
@@ -174,6 +174,7 @@ const cart_products_show = (cart_products) => {
 }
 
 let cart_products;
+
 if(JSON.parse(localStorage.getItem("cart_product")))
     {   
         cart_products = JSON.parse(localStorage.getItem("cart_product"));  
@@ -277,7 +278,7 @@ const cart_show = (pro_info, w_do) => {
 
  //  cart_products = JSON.parse(localStorage.getItem("cart_product"));
     console.log(cart_products)
-    if (cart_products.every(e => e !== cart_filter)) {
+    if (cart_products.every(e => e.id !== cart_filter.id)) {
         cart_products.push(cart_filter);
         cart_products[cart_products.indexOf(cart_filter)].quantity = 1;
     } else { 
@@ -298,8 +299,9 @@ const cart_show = (pro_info, w_do) => {
         }
     }
 
- //   localStorage.setItem("cart_product",JSON.stringify(cart_products));
+    localStorage.setItem("cart_product",JSON.stringify(cart_products));
     
+    console.log(cart_products)
     cart_products_show(cart_products);
 };
 
@@ -454,10 +456,10 @@ const main = document.getElementsByTagName("main")[0];
 
 main.addEventListener("click", (e) => {
 
-    const product_box = e.target.closest(".product_box");
+    
    
-    product_box.addEventListener("click", (e) => {
-        
+    if(e.target.classList.contains("product_box") || e.target.classList.contains("product-img") || e.target.classList.contains("pro-info")){
+        const product_box = e.target.closest(".product_box");
         const pro_in = products.filter((e) => {return product_box.attributes.num.value == e.id});
         localStorage.setItem("product_box",JSON.stringify(pro_in));
     
@@ -466,7 +468,7 @@ main.addEventListener("click", (e) => {
 
         const currentPageLink = window.location.href;
         localStorage.setItem("currentPage",currentPageLink);
-    });
+    };
 
     // Get the product information from the closest '.product_box' element
     

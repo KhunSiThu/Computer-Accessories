@@ -115,10 +115,11 @@ const product_show = (e1,e2) => {
                                 <button class="love_btn"><i class="fa-solid fa-heart"></i></button>
                             </div>
                             <div class = "info_con">
-                                <img src="${e2.img}.png" alt="">
+                                <img class="product-img" src="${e2.img}.png" alt="">
                                 <div class = "info_buy">
                                     <p class = "pro_info" >${e2.info}</p>
                                     <div class="buy">
+
                                         <span>Price : $<em class = "pro_price">${e2.price}</em></span>
                                         <button id="buy_now" class="b3 buy_btn">Buy Now</button>
                                         <button class="cart_btn b3"><i class="fa-solid fa-cart-shopping cart_chose"></i></button>

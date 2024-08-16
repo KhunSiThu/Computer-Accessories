@@ -15,6 +15,7 @@ const circle_btn = document.querySelector(".circle_btn");
 const dark_icon = document.querySelector(".dark_icon");
 const dark_text = document.querySelector(".dark_text");
 
+const userBtn = document.querySelector(".user_btn");
 const cart_container =document.querySelector(".cart_container");
 const fav_container = document.querySelector(".fav_container");
 const quantities = document.querySelector(".quantities");
@@ -78,5 +79,5 @@ export
     hot_scroll,feat_scroll,pc_product,li1_btn,li2_btn,li3_btn,laptops_product,motherboards_product,monitors_product,
     other_product,search_tag,search_result,menu_btn,menu_con,menu_bar,dark_btn,circle_btn,body,dark_icon,dark_text,
     brand_btn,all_btn,brand_icon,brands,pu_btn,mi_btn,b_price,a_price,go_btn,quantities,h_love_btn,fav,item_num,
-    check_form_container,ads_img,ads_sm_img,cart_container,fav_container,user_name,profile_img
+    check_form_container,ads_img,ads_sm_img,cart_container,fav_container,user_name,profile_img,userBtn
 }
