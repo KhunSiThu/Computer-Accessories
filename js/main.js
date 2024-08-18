@@ -122,7 +122,6 @@ const fav_show_btn = document.querySelector(".fav_show_btn");
 
 // State variables
 
-let fav_products = [];
 let sum_price = 0;
 let total = 0;
 let pro_info = [];
@@ -174,6 +173,7 @@ const cart_products_show = (cart_products) => {
 }
 
 let cart_products;
+let fav_products;
 
 if(JSON.parse(localStorage.getItem("cart_product")))
     {   
@@ -184,6 +184,7 @@ if(JSON.parse(localStorage.getItem("cart_product")))
     } else {
         cart_products = [];
     }
+
 // Cart show/hide functionality
 cart_show_btn.addEventListener("click", () => {
 
@@ -273,37 +274,25 @@ fav_show_btn.addEventListener("click", () => {
 });
 
 // Cart show function to update the cart
-const cart_show = (pro_info, w_do) => {
+const cart_show = (pro_info) => {
     const cart_filter = products.filter(e => e.info === pro_info)[0];
-
+    console.log(pro_info)
+    console.log(cart_filter)
  //  cart_products = JSON.parse(localStorage.getItem("cart_product"));
-    console.log(cart_products)
-    if (cart_products.every(e => e.id !== cart_filter.id)) {
+  
+    if (cart_products.every(e => e.info !== cart_filter.info)) {
         cart_products.push(cart_filter);
         cart_products[cart_products.indexOf(cart_filter)].quantity = 1;
-    } else { 
-        if (w_do === "mi") {
-            if (cart_products[cart_products.indexOf(cart_filter)].quantity > 1) {
-                cart_products[cart_products.indexOf(cart_filter)].quantity -= 1;
-            } else {
-                cart_products.splice(cart_products.indexOf(cart_filter), 1);
-            }
-        } 
-
-        if (w_do === "pu" || w_do === "cart") {
-            cart_products[cart_products.indexOf(cart_filter)].quantity += 1;
-        } 
-        
-        if (w_do === "remove") {
-            cart_products.splice(cart_products.indexOf(cart_filter), 1);
-        }
-    }
+    } 
 
     localStorage.setItem("cart_product",JSON.stringify(cart_products));
     
-    console.log(cart_products)
     cart_products_show(cart_products);
+
+
 };
+
+
 
 const check_form_show = (check_form_container,price) =>
 {
@@ -407,13 +396,79 @@ const check_form_show = (check_form_container,price) =>
         });
 }
 
+// Add event listeners to the cart container
+cart_container.addEventListener("click", (e) => {
+    const cart_pro = document.querySelectorAll(".cart_pro");
+    const cart_pro_info = document.querySelectorAll(".cart_pro_info");
+
+    // Display checkout form
+    if (e.target.classList.contains("check_btn")) {
+        const totalPrice = document.querySelector(".total_price");
+        sum_price = totalPrice.textContent;
+    check_form_show(check_form_container,sum_price);
+    }
+
+    if(e.target.classList.contains("q_pu"))
+    {
+        const cart_pro = e.target.closest(".cart_pro");
+        const cart_pro_info = cart_pro.querySelector(".cart_pro_info").textContent;
+        
+        cart_products.map((e) => {
+            if(e.info == cart_pro_info)
+            {
+                e.quantity += 1;
+            }
+        })
+        localStorage.setItem("cart_product",JSON.stringify(cart_products));
+        cart_products_show(cart_products);
+    }
+
+    if(e.target.classList.contains("q_min"))
+    {
+        const cart_pro = e.target.closest(".cart_pro");
+        const cart_pro_info = cart_pro.querySelector(".cart_pro_info").textContent;
+        
+        cart_products.map((e) => {
+            if(e.info == cart_pro_info)
+            {
+                if(e.quantity > 1)
+                {
+                    e.quantity -= 1;
+                } else {
+                    const remove_pro = cart_products.filter((pro) => {
+                        return pro.info == cart_pro_info;
+                     })[0];
+                     
+                     cart_products.splice(cart_products.indexOf(remove_pro),1);
+                }
+            }
+        })
+        localStorage.setItem("cart_product",JSON.stringify(cart_products));
+        cart_products_show(cart_products);
+    }
+
+    if(e.target.classList.contains("remove"))
+    {
+        const cart_pro = e.target.closest(".cart_pro");
+
+        const cart_pro_info = cart_pro.querySelector(".cart_pro_info").textContent;
+        const remove_pro = cart_products.filter((pro) => {
+           return pro.info == cart_pro_info;
+        })[0];
+        
+        cart_products.splice(cart_products.indexOf(remove_pro),1);
+
+        localStorage.setItem("cart_product",JSON.stringify(cart_products));
+        cart_products_show(cart_products);
+    }
+});
 
 // cart_products = localStorage.getItem("cart_product");
 
 
 
 // Favorite show function to update the favorite list
-const fav_show = (fav_pro_con, fav_products) => {
+const fav_show = (fav_products) => {
     fav_pro_con.innerHTML = "";
     fav_products.forEach((e) => {
         fav_pro_con.innerHTML += `
@@ -451,6 +506,15 @@ const fav_show = (fav_pro_con, fav_products) => {
     }
 };
 
+
+if(JSON.parse(localStorage.getItem("fav_products")))
+    {
+        fav_products = JSON.parse(localStorage.getItem("fav_products"));
+        fav_show(fav_products);
+    } else {
+        fav_products = [];
+    }
+
 const main = document.getElementsByTagName("main")[0];
 // Add event listeners to all elements with the class 'product_box'
 
@@ -482,7 +546,7 @@ main.addEventListener("click", (e) => {
     if (e.target.classList.contains("cart_btn") || e.target.classList.contains("cart_chose")) {
         const pro_info = e.target.closest(".product_box").querySelector(".pro_info").textContent;
         const w_do = "cart";
-        cart_show(pro_info, w_do);
+        cart_show(pro_info);
     }
 
     // If the clicked element has the class 'fa-heart'
@@ -513,7 +577,8 @@ main.addEventListener("click", (e) => {
         }
 
         // Update the favorite products display
-        fav_show(fav_pro_con, fav_products);
+        fav_show( fav_products);
+        localStorage.setItem("fav_products",JSON.stringify(fav_products));
 
     }
     
@@ -546,39 +611,7 @@ main.addEventListener("click", (e) => {
 });
 
 
-// Add event listeners to the cart container
-cart_container.addEventListener("click", (e) => {
-    const cart_pro = document.querySelectorAll(".cart_pro");
-    const cart_pro_info = document.querySelectorAll(".cart_pro_info");
 
-    // Increase product quantity
-    if (e.target.classList.contains("q_pu")) {
-        const pro_info = e.target.closest(".cart_info").querySelector(".cart_pro_info").textContent;
-        const w_do = "pu";
-        cart_show(pro_info, w_do);
-    }
-
-    // Decrease product quantity
-    if (e.target.classList.contains("q_min")) {
-        const pro_info = e.target.closest(".cart_info").querySelector(".cart_pro_info").textContent;
-        const w_do = "mi";
-        cart_show(pro_info, w_do);
-    }
-
-    // Remove product from cart
-    if (e.target.classList.contains("remove")) {
-        const pro_info = e.target.closest(".cart_info").querySelector(".cart_pro_info").textContent;
-        const w_do = "remove";
-        cart_show(pro_info, w_do);
-    }
-
-    // Display checkout form
-    if (e.target.classList.contains("check_btn")) {
-        const totalPrice = document.querySelector(".total_price");
-        sum_price = totalPrice.textContent;
-       check_form_show(check_form_container,sum_price);
-    }
-});
 
 // Add event listeners to the favorite products container
 fav_pro_con.addEventListener("click", (e) => {
@@ -592,15 +625,20 @@ fav_pro_con.addEventListener("click", (e) => {
         const fav_no = e.target.closest(".fav_pro").attributes.no.value;
         
         const product_con = document.querySelector(`[num = "${fav_no}"]`);
-        product_con.querySelector(".save").style.background = "";
+       
+        if(product_con)
+        {
+            product_con.querySelector(".save").style.background = "";
+            const heart = product_con.querySelector(".fa-heart");
+            heart.style.color = "";
+            heart.classList.remove("click");
+            product_con.querySelector(".love_btn").style.opacity = .5;
+        }
 
-        const heart = product_con.querySelector(".fa-heart");
-        heart.style.color = "";
-        heart.classList.remove("click");
-        product_con.querySelector(".love_btn").style.opacity = .5;
+       
 
         fav_products.splice(fav_products.indexOf(fav_filter), 1);
-        fav_show(fav_pro_con, fav_products);
+        fav_show( fav_products);
 
 
     }
@@ -613,4 +651,4 @@ fav_pro_con.addEventListener("click", (e) => {
     }
 });
 
-export {cart_products,fav_products};
+export {cart_products,fav_products,cart_products_show,check_form_show};
