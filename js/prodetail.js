@@ -5,7 +5,9 @@ const product_detail = JSON.parse(localStorage.getItem("product_box"));
 
 document.querySelector(".s1").innerHTML = `
  <div class="d_left">
-    <img class="main-img" src="${product_detail[0].img}.png" alt="">
+    <div class="main-img-con">
+        <img class="main-img" src="${product_detail[0].img}.png" alt="">
+    </div>
     <div class="choose-img">
         <button><img class="img-1" src="${product_detail[0].img}.png" alt=""></button>
         <button><img class="img-2" src="${product_detail[0].Images.img2}" alt=""></button>
@@ -69,6 +71,8 @@ document.querySelector(".s1").innerHTML = `
 const chooseImg = document.querySelector(".choose-img");
 const mainImg = document.querySelector(".main-img");
 
+const imgOnlyShowCon = document.querySelector(".img-only-show-con");
+
 chooseImg.addEventListener("click", (e) => {
     if(e.target.classList.contains("img-1")){
         mainImg.src = document.querySelector(".img-1").src;
@@ -81,6 +85,46 @@ chooseImg.addEventListener("click", (e) => {
     if(e.target.classList.contains("img-3")){
         mainImg.src = document.querySelector(".img-3").src;
     }
+})
+
+mainImg.addEventListener("click", (e) => {
+    imgOnlyShowCon.style.display = "block";
+
+    imgOnlyShowCon.innerHTML = `
+        <div class="img-only-show">
+            <div class="ch-img">
+                <button><img class="img-1" src="${product_detail[0].img}.png" alt=""></button>
+                <button><img class="img-2" src="${product_detail[0].Images.img2}" alt=""></button>
+                <button><img class="img-3" src="${product_detail[0].Images.img3}" alt=""></button>
+            </div>
+            <div class="ch-show">
+                <img class="main" src="${mainImg.src}" alt="">
+            </div>
+
+            <button class="remove close"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+    `
+
+    const chooseImg = document.querySelector(".ch-img");
+    const main_img = document.querySelector(".main");
+    
+    chooseImg.addEventListener("click", (e) => {
+        if(e.target.classList.contains("img-1")){
+            main_img.src = document.querySelector(".img-1").src;
+        }
+    
+        if(e.target.classList.contains("img-2")){
+            main_img.src = document.querySelector(".img-2").src;
+        }
+    
+        if(e.target.classList.contains("img-3")){
+            main_img.src = document.querySelector(".img-3").src;
+        }
+    });
+
+    document.querySelector(".close").addEventListener("click", () => {
+        imgOnlyShowCon.style.display = "none";
+    })
 })
 
 let rat = Math.round(product_detail[0].rating);

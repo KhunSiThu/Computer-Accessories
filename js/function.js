@@ -24,12 +24,31 @@ const search_result_show = () => {
         {
             const search_filter = products.filter(e => e.info.toLowerCase().includes(search_value));
             search_result.innerHTML = ""
+
             search_filter.forEach((e) => {
-                search_result.innerHTML += `<a>
+                search_result.innerHTML += `<a class="pro-link">
                                                     <img src="${e.img}.png" alt="">
-                                                    <p class="col_black">${e.info}</p>
+                                                    <p class="col_black pro-info">${e.info}</p>
                                             </a>`
             })
+
+            // const pro_link = document.querySelectorAll(".pro-link");
+            // pro_link.forEach((e) => {
+            //     e.addEventListener("click",() => {
+            //         const pro_info = e.querySelector(".pro-info").textContent;
+            //         const proFilter = products.filter((e) => {
+            //             return e.info == pro_info;
+            //         })
+            //         localStorage.setItem("product_box",JSON.stringify(proFilter));
+    
+            //         const a_link = document.querySelector(".a_link");
+            //         a_link.click();
+
+            //         const currentPageLink = window.location.href;
+            //         localStorage.setItem("currentPage",currentPageLink);
+            //     })
+            // })
+
         } else {
             search_result.innerHTML = ""
         }
@@ -198,11 +217,11 @@ const feat_see_show = () => {
 }
 
 const next_scroll = (e) => {
-    e.scrollLeft += 1250;
+    e.scrollLeft += 1156;
 }
 
 const back_scroll = (e) => {
-    e.scrollLeft -= 1250;
+    e.scrollLeft -= 1156;
 }
 
 //list 

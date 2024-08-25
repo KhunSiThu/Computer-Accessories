@@ -10,19 +10,29 @@ section
     justify-content: space-between;
     background-color: white;
     padding: 20px;
+    border: 1px solid rgba(212, 212, 212, 0.411);
     
 
     .d_left {
         width: 35%;
         padding: 20px 40px;
         background-color: white;
-        border: 1px solid black;
+       
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 460px;
 
-        img {
+        .main-img-con {
             width: 100%;
+            height: 330px;
+            img {
+                width: 100%;
+                height: auto;
+            }
         }
 
-        div 
+        .choose-img
         {
             width: 100%;
             display: flex;
@@ -30,9 +40,9 @@ section
        
             button {
                 align-items: center;
-                width: 90px;
-                height: 90px;
-                border: 1px solid rgb(201, 201, 201);
+                width: 80px;
+                height: 80px;
+                border: 1px solid rgba(201, 201, 201, 0.616);
                 background-color: white;
                 padding: 10px;
                 border-radius: 2px;
@@ -255,4 +265,74 @@ section
             background: none;
         }
     }
+}
+
+.img-only-show-con {
+    width: 100vw;
+    height: 100vh;
+    display: none;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+
+    backdrop-filter: blur(10px);
+
+
+    .img-only-show {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+        height: 90%;
+        margin: 2.5% auto;
+        border: 1px solid #3AB6FA;
+        background-color: white;
+        position: relative;
+
+        .ch-img {
+            width: 20%;
+           
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+
+            button {
+                width: 70%;
+                padding: 10px;
+                margin: 0 auto;
+                background-color: white;
+                border: 1px solid rgba(163, 163, 163, 0.548);
+            }
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .ch-show{
+            width: 80%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 60%;
+            }
+        }
+
+        .remove {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            border: none;
+            background: none;
+            font-size: 30px;
+            color: #38B5FA;
+        }
+    }
+
 }

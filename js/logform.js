@@ -42,7 +42,9 @@ td.forEach(e => {
         if(el.target.classList.contains("label") || el.target.classList.contains("input"))
             {
                 error_show.style.display = "none";
+
                 const td = el.target.closest("td");
+
                 const lab = td.querySelector(".label");
                 const input = td.querySelector(".input");
                 const icon = td.querySelector(".fa-solid");
@@ -50,18 +52,12 @@ td.forEach(e => {
                 lab.style.transform = "translateY(-25px)";
                 input.focus();
 
-                // td.addEventListener("mouseout", () => {
-                //     if(input.value=="")
-                //     {
-                //         lab.style.transform = "translateY(0px)"
-                //     }
-                // })
 
                 input.addEventListener("keyup", (e) => {
 
                     if(e.target.classList.contains("name"))
                         {
-                            if(input.value.length !== 0)
+                            if(input.value.length > 3)
                                 {
                                     icon.style.color = "#ff0000";
                                     icon.style.opacity = 1;
@@ -103,8 +99,8 @@ td.forEach(e => {
                          
                     if(e.target.classList.contains("email"))
                         {
-                            const em = "@gmail.com"
-                            if(input.value.includes(em))
+                           
+                            if(input.value.includes("@gmail.com"))
                                 {
                                     icon.style.color = "#ff0000";
                                     icon.style.opacity = 1;
@@ -120,6 +116,7 @@ td.forEach(e => {
         if(el.target.classList.contains("fa-solid"))
             {
                 const td = el.target.closest("td");
+
                 const lab = td.querySelector(".label");
                 const input = td.querySelector(".input");
                 const icon = td.querySelector(".fa-solid");
@@ -147,9 +144,10 @@ singup_btn.addEventListener("click", () => {
     if(localStorage.getItem("user"))
         {
             const user_info = JSON.parse(localStorage.getItem("user"));
+
             if(user_info.u_email === email.value)
                 {    
-                    if(name.value.length > 3 && email.value.length > 3 && pass1.value.length > 3 && pass2.value.length > 3)
+                    if(name.value.length > 3 && email.value.length > 3 && pass1.value.length > 7 && pass2.value.length > 7)
                         {
                             singup_btn.type = "button";
                             have_acc_alert.style.display = "flex";
@@ -165,14 +163,13 @@ singup_btn.addEventListener("click", () => {
                             })
                         }
 
-                } else if(name.value.length > 3 && email.value.length > 3 && pass1.value.length > 3 && pass2.value.length > 3){
+                } else if(name.value.length > 3 && email.value.length > 3 && pass1.value.length > 7 && pass2.value.length > 7){
                     singup_btn.type = "submit";
                     user_info_save();
                 }
-        } else if(name.value.length > 3 && email.value.length > 3 && pass1.value.length > 3 && pass2.value.length > 3){
+        } else if(name.value.length > 3 && email.value.length > 3 && pass1.value.length > 7 && pass2.value.length > 7){
             singup_btn.type = "submit";
             user_info_save();
-
         } 
 })
 
@@ -205,7 +202,9 @@ const ani_con = document.querySelector(".ani_con");
 
 let show_ani = setInterval(()=>{
     ani_con.style.display = "none";
-},4000);
+},1000);
+
+show_ani();
 
 if(ani_con.style.display === "none")
 {

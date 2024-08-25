@@ -757,7 +757,8 @@ section
 
     .product_types a:hover 
     {
-        background: #63B1EF;
+        background: #19191a;
+        color: white;
     }
 
     .product_types img 
@@ -804,7 +805,8 @@ section
         .hot_scroll,.feat_scroll
         {
             overflow: scroll;
-            width: 100%;
+            width: 1126px;
+            margin: 0 auto;
             scrollbar-width: none;
             position: relative;
         }
@@ -825,7 +827,7 @@ section
             flex-direction: column;
             justify-content: space-between;
             position: relative;
-            width: 282px; 
+            width: 259px; 
             align-items: center;
             margin: 15px 0;
         }
@@ -942,12 +944,12 @@ section
     
         .back_btn,.feat_back 
         {
-            left: 5px;
+            left: 25px;
         }
     
         .next_btn,.feat_next
         {
-            right: 5px;
+            right: 25px;
         }
     
         .see_con 

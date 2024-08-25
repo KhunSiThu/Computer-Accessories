@@ -29,11 +29,11 @@ const user_img_Url = localStorage.getItem("user-img");
 
 if(user_img_Url)
     {
-        profile_img.forEach(e => e.src = user_img_Url)
+        profile_img.forEach(e => e.src = user_img_Url);    
     }
 
 // Header event listeners
-search_tag.addEventListener("keyup", () => search_result_show());
+search_tag.addEventListener("keyup",()=>{search_result_show()});
 
 menu_btn.addEventListener("click", () => {
     menu_show();
@@ -41,7 +41,9 @@ menu_btn.addEventListener("click", () => {
 
 const ads_show = () => {
     ads_sm_img[0].style.border = "3px solid #38B5FA";
+    
     let i = 2;
+
     setInterval(() => {
         if(i<=5)
             {
@@ -67,6 +69,11 @@ if (body.classList.contains("ads"))
 // Home page specific functions
 
 if (body.classList.contains("home")) {
+
+    if(user_img_Url)
+    {
+        document.querySelector(".up_profile").style.display = "none"
+    }
     const user_info = JSON.parse(localStorage.getItem("user"));
     user_name.innerHTML = user_info.u_name;
 
@@ -78,25 +85,25 @@ if (body.classList.contains("home")) {
     hot_next_btn.addEventListener("click", () => {
         next_scroll(hot_scroll);
         hot_back_btn.classList.remove("dis_none");
-        if (hot_scroll.scrollLeft > 1500) hot_next_btn.classList.add("dis_none");
+        if (hot_scroll.scrollLeft > 1156) hot_next_btn.classList.add("dis_none");
     });
 
     hot_back_btn.addEventListener("click", () => {
         back_scroll(hot_scroll);
         hot_next_btn.classList.remove("dis_none");
-        if (hot_scroll.scrollLeft < 1500) hot_back_btn.classList.add("dis_none");
+        if (hot_scroll.scrollLeft < 1156) hot_back_btn.classList.add("dis_none");
     });
 
     feat_next_btn.addEventListener("click", () => {
         next_scroll(feat_scroll);
         feat_back_btn.classList.remove("dis_none");
-        if (feat_scroll.scrollLeft > 1500) feat_next_btn.classList.add("dis_none");
+        if (feat_scroll.scrollLeft > 1156) feat_next_btn.classList.add("dis_none");
     });
 
     feat_back_btn.addEventListener("click", () => {
         back_scroll(feat_scroll);
         feat_next_btn.classList.remove("dis_none");
-        if (feat_scroll.scrollLeft < 1500) feat_back_btn.classList.add("dis_none");
+        if (feat_scroll.scrollLeft < 1156) feat_back_btn.classList.add("dis_none");
     });
 }
 
